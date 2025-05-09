@@ -133,6 +133,9 @@ properties:
     description: |
       Role to bind to the principal.
     required: true
+    exactly_one_of:
+      - 'predefinedRole'
+      - 'customRole'
     properties:
       - name: 'predefinedRole'
         type: Enum
@@ -143,6 +146,10 @@ properties:
           - 'ADMIN'
           - 'EDIT'
           - 'VIEW'
+      - name: 'customRole'
+        type: String
+        description: |
+          CustomRole is the name of a custom Kubernetes ClusterRole to use.
   - name: 'labels'
     type: KeyValueLabels
     description: |
