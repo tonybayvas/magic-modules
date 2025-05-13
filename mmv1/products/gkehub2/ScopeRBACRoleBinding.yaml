@@ -10,7 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# here
 
 ---
 name: 'ScopeRBACRoleBinding'
@@ -134,6 +133,7 @@ properties:
     description: |
       Role to bind to the principal.
     required: true
+    
     properties:
       - name: 'predefinedRole'
         type: Enum
@@ -144,6 +144,16 @@ properties:
           - 'ADMIN'
           - 'EDIT'
           - 'VIEW'
+        exactly_one_of:
+          - 'predefinedRole'
+          - 'customRole'
+      - name: 'customRole'
+        type: String
+        description: |
+          Custom Role is the custom Kubernetes ClusterRole to be used. The custom role format must be RFC 1123 compliant.
+        exactly_one_of:
+          - 'predefinedRole'
+          - 'customRole'
   - name: 'labels'
     type: KeyValueLabels
     description: |
