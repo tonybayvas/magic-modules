@@ -155,7 +155,7 @@ properties:
       - name: 'customRole'
         type: String
         description: |
-          Custom Role is the custom Kubernetes ClusterRole to be used. The custom role format must be RFC 1123 compliant.
+          Custom Role is the custom Kubernetes ClusterRole to be used. The custom role format must be allowlisted in the rbacrolebindingactuation feature and RFC 1123 compliant.
         exactly_one_of:
           - 'predefinedRole'
           - 'customRole'
