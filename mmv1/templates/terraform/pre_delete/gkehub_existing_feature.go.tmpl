@@ -1,5 +1,5 @@
 // Make sure that mandatory/default features continue to exist.
 
-if {{"}}name{{"}} == "rbacrolebindingactuation" {
+if d.Get("name").(string) == "rbacrolebindingactuation" {
   return nil
 }
