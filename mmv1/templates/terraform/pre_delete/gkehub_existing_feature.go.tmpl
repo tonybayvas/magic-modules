@@ -22,6 +22,7 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
   		return fmt.Errorf("Error constructing id: %s", err)
   	}
   	d.SetId(id)
+    d.Set("spec.rbacrolebindingactuation.allowedCustomRoles", "")
   	return resourceGKEHub2FeatureUpdate(d, meta)
   }
 }
