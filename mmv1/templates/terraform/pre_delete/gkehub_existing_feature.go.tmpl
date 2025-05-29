@@ -22,7 +22,7 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
       return fmt.Errorf("Error constructing id: %s", err)
     }
     d.SetId(id)
-    d.Set("spec", nil)
+    d.Set("spec.rbacrolebindingactuation", nil)
     return resourceGKEHub2FeatureUpdate(d, meta)
   }
 }
