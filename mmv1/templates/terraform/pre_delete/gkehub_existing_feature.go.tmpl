@@ -23,7 +23,7 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
     }
     d.SetId(id)
     // Clear the allowed custom roles.
-    d.Set("spec", map[string]struct{"rbacrolebindingactuation": map[string]struct{"allowedCustomRoles": []string{}}})
+    d.Set("spec", map[string]struct{}{"rbacrolebindingactuation": map[string]struct{}{"allowedCustomRoles": []string{}}})
     return resourceGKEHub2FeatureUpdate(d, meta)
   }
 }
