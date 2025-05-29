@@ -23,7 +23,9 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
     }
     d.SetId(id)
     // Clear the allowed custom roles.
-    d.Set("spec", map[string]interface{}{"rbacrolebindingactuation": map[string]interface{}{"allowedCustomRoles": []string{}}})
+    log.Printf("[DEBUG] the spec inside d looks like %v", d.Get("spec"))
+    // d.Set("spec", map[string]interface{}{"rbacrolebindingactuation": map[string]interface{}{"allowedCustomRoles": []string{}}}) 
+    log.Printf("[DEBUG] Fleet feature already exists %s", d.Get("name"))
     return resourceGKEHub2FeatureUpdate(d, meta)
   }
 }
