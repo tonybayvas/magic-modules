@@ -18,10 +18,10 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
   	// Fleet feature exists as expected
   	log.Printf("[DEBUG] Fleet feature already exists %s", d.Get("name"))
   	id, err := tpgresource.ReplaceVars(d, config, "{{$.GetIdFormat}}")
-  	if err != nil {
-  		return fmt.Errorf("Error constructing id: %s", err)
-  	}
-  	d.SetId(id)
+    if err != nil {
+      return fmt.Errorf("Error constructing id: %s", err)
+    }
+    d.SetId(id)
     d.Set("spec", nil)
   	return resourceGKEHub2FeatureUpdate(d, meta)
   }
