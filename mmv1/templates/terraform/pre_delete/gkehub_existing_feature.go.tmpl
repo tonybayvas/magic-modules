@@ -24,7 +24,11 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
     d.SetId(id)
     // Clear the allowed custom roles.
     log.Printf("[DEBUG] the spec inside d looks like %v", d.Get("spec"))
-    d.Set("spec", map[string]interface{}{"rbacrolebindingactuation": map[string]interface{}{"allowedCustomRoles": []string{}}}) 
+    d.Set("spec", map[string]interface{}{"rbacrolebindingactuation": map[string]interface{}{"allowedCustomRoles": []string{}}})
+    log.Printf("[DEBUG] the spec inside d after the update looks like %v", d.Get("spec"))
+    d.Set("spec", nil)
+    log.Printf("[DEBUG] the spec inside d after the update looks like %v", d.Get("spec"))
+    d.Set("spec.rbacrolebindingactuation.allowed_custom_roles", []string{})
     log.Printf("[DEBUG] the spec inside d after the update looks like %v", d.Get("spec"))
     return resourceGKEHub2FeatureUpdate(d, meta)
   }
