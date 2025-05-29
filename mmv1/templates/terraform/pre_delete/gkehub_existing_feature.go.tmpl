@@ -23,6 +23,6 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
     }
     d.SetId(id)
     d.Set("spec", nil)
-  	return resourceGKEHub2FeatureUpdate(d, meta)
+    return resourceGKEHub2FeatureUpdate(d, meta)
   }
 }
