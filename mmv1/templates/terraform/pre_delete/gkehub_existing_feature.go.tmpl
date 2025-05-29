@@ -22,7 +22,8 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
       return fmt.Errorf("Error constructing id: %s", err)
     }
     d.SetId(id)
-    d.Set("spec.rbacrolebindingactuation", nil)
+    // Clear the allowed custom roles.
+    d.Set("spec", map[string]struct{"rbacrolebindingactuation": map[string]struct{"allowedCustomRoles": []string{}}})
     return resourceGKEHub2FeatureUpdate(d, meta)
   }
 }
