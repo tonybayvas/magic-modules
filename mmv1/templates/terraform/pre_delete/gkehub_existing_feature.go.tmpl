@@ -22,28 +22,25 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
       return fmt.Errorf("Error constructing id: %s", err)
     }
     d.SetId(id)
-    // Clear the allowed custom roles.
-    // log.Printf("[DEBUG] the spec inside d looks like %v", d.Get("spec"))
-    // d.Set("spec", map[string]interface{}{"rbacrolebindingactuation": map[string]interface{}{"allowedCustomRoles": []string{}}})
-    // log.Printf("[DEBUG] the spec inside d after the update looks like %v", d.Get("spec"))
-    // d.Set("spec", nil)
-    // log.Printf("[DEBUG] the spec inside d after the update looks like %v", d.Get("spec"))
-    // d.Set("spec.rbacrolebindingactuation.allowed_custom_roles", []string{})
-    // log.Printf("[DEBUG] the spec inside d after the update looks like %v", d.Get("spec"))
-    // oidc := d.Get("oidc")
-		// clientSecret := oidc.([]interface{})[0].(map[string]interface{})["client_secret"]
-		// clientSecretValue := clientSecret.([]interface{})[0].(map[string]interface{})["value"]
-		// clientSecretValue.([]interface{})[0].(map[string]interface{})["plain_text"] = updatedOidcClientSecret
 
-    spec := d.Get("spec")
-    log.Printf("[DEBUG] the spec looks like %v", spec)
-    rrbActuationFeature := spec.([]interface{})[0].(map[string]interface{})["rbacrolebindingactuation"]
-    rrbActuationFeature.([]interface{})[0].(map[string]interface{})["allowed_custom_roles"] = []string{}
-    log.Printf("[DEBUG] the spec after the update looks like %v", spec)
-    
-    if err := d.Set("spec", spec); err != nil {
-			return err
-		}
-    return resourceGKEHub2FeatureUpdate(d, meta)
+    if v, ok := d.GetOk("spec.0.rbacrolebindingactuation.0.allowed_custom_roles"); ok {
+      // if the allowed custom roles are empty, we do not need to clear them.
+	log.Printf("[DEBUG] Fleet feature custom roles found %v", v)
+	if v == []string{} {
+	  return nil
+	}
+	    spec := d.Get("spec")
+	    log.Printf("[DEBUG] the spec looks like %v", spec)
+	    rrbActuationFeature := spec.([]interface{})[0].(map[string]interface{})["rbacrolebindingactuation"]
+	    rrbActuationFeature.([]interface{})[0].(map[string]interface{})["allowed_custom_roles"] = []string{}
+	    log.Printf("[DEBUG] the spec after the update looks like %v", spec)
+	    
+	    if err := d.Set("spec", spec); err != nil {
+				return err
+			}
+	    return resourceGKEHub2FeatureUpdate(d, meta)
+    }
+	log.Printf("[DEBUG] Fleet feature custom roles not found")
+    return nil
   }
 }
