@@ -27,13 +27,16 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
     log.Printf("[DEBUG] spec: %+v, specOk: %t", spec, specOk)
     if specOk {
       if len(spec.([]interface{})) > 0 {
+        log.Printf("[DEBUG] spec length greater than 0")
         rrbActuationFeature := spec.([]interface{})[0].(map[string]interface{})["rbacrolebindingactuation"]
-        rrbActuationFeature.([]interface{})[0].(map[string]interface{})["allowed_custom_roles"] = []string{}
-        
-        if err := d.Set("spec", spec); err != nil {
-          return err
+        if len(rrbActuationFeature.([]interface{}) > 0 {
+          log.Printf("[DEBUG] rrb actuation feature length greater than 0")
+          rrbActuationFeature.([]interface{})[0].(map[string]interface{})["allowed_custom_roles"] = []string{}
+          if err := d.Set("spec", spec); err != nil {
+            return err
+          }
+          return resourceGKEHub2FeatureUpdate(d, meta)
         }
-        return resourceGKEHub2FeatureUpdate(d, meta)
       }
     }
     return nil
