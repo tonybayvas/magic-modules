@@ -253,6 +253,7 @@ properties:
         properties:
           - name: 'allowedCustomRoles'
             type: Array
+            required: true
             description: 'The list of allowed custom roles (ClusterRoles). If a custom role is not part of this list, it cannot be used in a fleet scope RBACRoleBinding. If a custom role in this list is in use, it cannot be removed from the list until the scope RBACRolebindings using it are deleted.'
             item_type:
               type: String
