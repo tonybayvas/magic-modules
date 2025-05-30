@@ -29,7 +29,7 @@ if d.Get("name").(string) == "rbacrolebindingactuation" {
       if len(spec.([]interface{})) > 0 {
         log.Printf("[DEBUG] spec length greater than 0")
         rrbActuationFeature := spec.([]interface{})[0].(map[string]interface{})["rbacrolebindingactuation"]
-        if len(rrbActuationFeature.([]interface{}) > 0 {
+        if len(rrbActuationFeature.([]interface{})) > 0 {
           log.Printf("[DEBUG] rrb actuation feature length greater than 0")
           rrbActuationFeature.([]interface{})[0].(map[string]interface{})["allowed_custom_roles"] = []string{}
           if err := d.Set("spec", spec); err != nil {
