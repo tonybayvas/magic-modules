@@ -46,4 +46,28 @@ resource "google_container_attached_cluster" "primary" {
       namespace = "default"
     }
   }
+  system_components_config {
+    tolerations {
+      key      = "my-key"
+      operator = "EQUAL"
+      value    = "my-value"
+      effect   = "NO_SCHEDULE"
+    }
+    tolerations {
+      key      = "my-key-without-value"
+      operator = "EXISTS"
+      effect   = "NO_EXECUTE"
+    }
+    tolerations {
+      operator = "EXISTS"
+      effect = "PREFER_NO_SCHEDULE"
+    }
+    labels {
+      key = "my-key"
+    }
+    labels {
+      key = "my-key-with-value"
+      value = "my-value"
+    }
+  }
 }
