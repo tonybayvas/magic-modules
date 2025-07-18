@@ -364,3 +364,51 @@ properties:
         enum_values:
           - 'VULNERABILITY_DISABLED'
           - 'VULNERABILITY_ENTERPRISE'
+  - name: 'systemComponentsConfig'
+    type: NestedObject
+    description: |
+      Defines the fields for customizing configurations for auto-installed components.
+    default_from_api: true
+    properties:
+      - name: 'tolerations'
+        type: Array
+        description: |
+          The Kubernetes tolerations to be applied to system components.
+        item_type:
+          type: NestedObject
+          properties:
+            - name: 'key'
+              type: String
+              description: 'Key is the toleration key to be applied to a pod.'
+            - name: 'operator'
+              type: Enum
+              description: 'Operator is the required toleration operator.'
+              required: True
+              enum_values:
+                - 'EQUAL'
+                - 'EXISTS'
+            - name: 'value'
+              type: String
+              description: 'Value is the toleration value.'
+            - name: 'effect'
+              type: Enum
+              description: 'Effect is the required toleration effect.'
+              required: True
+              enum_values:
+                - 'NO_SCHEDULE'
+                - 'PREFER_NO_SCHEDULE'
+                - 'NO_EXECUTE'
+      - name: 'labels'
+        type: Array
+        description: |
+          The Kubernetes labels to be applied to system components.
+        item_type:
+          type: NestedObject
+          properties:
+            - name: 'key'
+              type: String
+              description: 'Key is the label key to be applied to a pod.'
+              required: True
+            - name: 'value'
+              type: String
+              description: 'Value is the label value.'
